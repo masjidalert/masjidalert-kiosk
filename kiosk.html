@@ -9,55 +9,36 @@
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Aref+Ruqaa:wght@400;700&family=Cinzel:wght@400;500;600;700;800;900&family=Cinzel+Decorative:wght@700&family=Noto+Naskh+Arabic:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Reem+Kufi:wght@400;600;700&family=Scheherazade+New:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
-      html, body {
-        width: 100vw;
-        height: 100vh;
-        overflow: hidden;
-        background: #020614;
-      }
-      /* Root is always 1280x720 — JS will scale it */
+      html, body { width: 100vw; height: 100vh; overflow: hidden; background: #020614; }
       #root {
         position: absolute;
-        top: 0;
-        left: 0;
+        top: 0; left: 0;
         width: 1280px;
         height: 720px;
         overflow: hidden;
         transform-origin: top left;
       }
-      /* Override Tailwind screen utilities */
-      #root .w-screen { width: 1280px !important; }
-      #root .h-screen { height: 720px !important; }
-      #root .min-h-screen { min-height: 720px !important; }
     </style>
     <script>
       function scaleKiosk() {
         var root = document.getElementById('root');
         if (!root) return;
-        var W = 1280, H = 720;
-        var sw = window.innerWidth  || screen.width  || 1920;
-        var sh = window.innerHeight || screen.height || 1080;
-        var scale = Math.min(sw / W, sh / H);
-        var tx = (sw - W * scale) / 2;
-        var ty = (sh - H * scale) / 2;
+        var sw = window.innerWidth  || 1920;
+        var sh = window.innerHeight || 1080;
+        var scale = Math.min(sw / 1280, sh / 720);
+        var tx = (sw - 1280 * scale) / 2;
+        var ty = (sh - 720 * scale) / 2;
         root.style.transform = 'translate(' + tx + 'px,' + ty + 'px) scale(' + scale + ')';
-        // Also set background color on body to fill gaps
-        document.body.style.background = '#020614';
       }
-      // Run multiple times to catch Silk Browser's late initialization
       window.addEventListener('load', scaleKiosk);
-      document.addEventListener('DOMContentLoaded', scaleKiosk);
       window.addEventListener('resize', scaleKiosk);
-      setTimeout(scaleKiosk, 100);
-      setTimeout(scaleKiosk, 500);
-      setTimeout(scaleKiosk, 1000);
+      document.addEventListener('DOMContentLoaded', scaleKiosk);
+      setTimeout(scaleKiosk, 200);
+      setTimeout(scaleKiosk, 800);
       setTimeout(scaleKiosk, 2000);
-      setTimeout(scaleKiosk, 4000);
     </script>
-    <script type="module" crossorigin src="/masjidalert-kiosk/assets/index-GJM5yul6.js"></script>
-    <link rel="stylesheet" crossorigin href="/masjidalert-kiosk/assets/index-8DWP5Qpa.css">
+    <script type="module" crossorigin src="/masjidalert-kiosk/assets/index-C1_P9nkY.js"></script>
+    <link rel="stylesheet" crossorigin href="/masjidalert-kiosk/assets/index-Cu-t--e0.css">
   </head>
-  <body>
-    <div id="root"></div>
-  </body>
+  <body><div id="root"></div></body>
 </html>

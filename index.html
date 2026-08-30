@@ -4,59 +4,54 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MasjidAlert Kiosk</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Aref+Ruqaa:wght@400;700&family=Cinzel:wght@400;500;600;700;800;900&family=Cinzel+Decorative:wght@700&family=Noto+Naskh+Arabic:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Reem+Kufi:wght@400;600;700&family=Scheherazade+New:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-      * { box-sizing: border-box; margin: 0; padding: 0; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
       html, body {
-        width: 100%; height: 100%;
+        width: 100vw; height: 100vh;
         background: #020614;
         overflow: hidden;
-      }
-      /* Outer shell fills entire real screen */
-      #shell {
-        position: fixed;
-        inset: 0;
-        background: #020614;
         display: flex;
         align-items: center;
         justify-content: center;
       }
-      /* Inner kiosk is always 1280x720, scaled to fit */
-      #root {
+      #scaler {
         width: 1280px;
         height: 720px;
         transform-origin: center center;
         flex-shrink: 0;
-        overflow: hidden;
-        position: relative;
+        background: #020614;
+      }
+      iframe {
+        width: 1280px;
+        height: 720px;
+        border: none;
+        display: block;
       }
     </style>
     <script>
-      function scaleKiosk() {
-        var root = document.getElementById('root');
-        if (!root) return;
-        var sw = window.innerWidth;
-        var sh = window.innerHeight;
-        var scale = Math.min(sw / 1280, sh / 720);
-        root.style.transform = 'scale(' + scale + ')';
+      function scale() {
+        var el = document.getElementById('scaler');
+        if (!el) return;
+        var s = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
+        el.style.transform = 'scale(' + s + ')';
       }
-      window.addEventListener('load', scaleKiosk);
-      window.addEventListener('resize', scaleKiosk);
-      document.addEventListener('DOMContentLoaded', function() {
-        scaleKiosk();
-        setTimeout(scaleKiosk, 500);
-        setTimeout(scaleKiosk, 1500);
-        setTimeout(scaleKiosk, 3000);
+      window.addEventListener('resize', scale);
+      window.addEventListener('load', function() {
+        scale();
+        setTimeout(scale, 500);
+        setTimeout(scale, 1500);
       });
+      document.addEventListener('DOMContentLoaded', scale);
     </script>
-    <script type="module" crossorigin src="/masjidalert-kiosk/assets/index-B9sRTMK1.js"></script>
-    <link rel="stylesheet" crossorigin href="/masjidalert-kiosk/assets/index-8DWP5Qpa.css">
   </head>
   <body>
-    <div id="shell">
-      <div id="root"></div>
+    <div id="scaler">
+      <iframe
+        id="kiosk"
+        src="/masjidalert-kiosk/kiosk.html"
+        scrolling="no"
+        allowfullscreen
+      ></iframe>
     </div>
   </body>
 </html>

@@ -6,27 +6,9 @@
     <title>MasjidAlert Kiosk</title>
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
-      html, body {
-        width: 100vw; height: 100vh;
-        background: #020614;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      #scaler {
-        width: 1280px;
-        height: 720px;
-        transform-origin: center center;
-        flex-shrink: 0;
-        background: #020614;
-      }
-      iframe {
-        width: 1280px;
-        height: 720px;
-        border: none;
-        display: block;
-      }
+      html, body { width: 100vw; height: 100vh; background: #020614; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+      #scaler { width: 1280px; height: 720px; transform-origin: center center; flex-shrink: 0; }
+      iframe { width: 1280px; height: 720px; border: none; display: block; }
     </style>
     <script>
       function scale() {
@@ -36,22 +18,13 @@
         el.style.transform = 'scale(' + s + ')';
       }
       window.addEventListener('resize', scale);
-      window.addEventListener('load', function() {
-        scale();
-        setTimeout(scale, 500);
-        setTimeout(scale, 1500);
-      });
+      window.addEventListener('load', function() { scale(); setTimeout(scale, 500); setTimeout(scale, 1500); });
       document.addEventListener('DOMContentLoaded', scale);
     </script>
   </head>
   <body>
     <div id="scaler">
-      <iframe
-        id="kiosk"
-        src="/masjidalert-kiosk/kiosk.html"
-        scrolling="no"
-        allowfullscreen
-      ></iframe>
+      <iframe src="/masjidalert-kiosk/kiosk.html" scrolling="no"></iframe>
     </div>
   </body>
 </html>

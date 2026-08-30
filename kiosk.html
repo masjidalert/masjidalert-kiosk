@@ -10,33 +10,28 @@
     <style>
       * { margin:0; padding:0; box-sizing:border-box; }
       html, body {
-        width:100vw; height:100vh;
-        overflow:hidden; background:#020614;
+        width:100vw; height:100vh; overflow:hidden; background:#020614;
         display:flex; align-items:center; justify-content:center;
       }
       #root {
-        width:1280px; height:720px;
-        overflow:hidden; flex-shrink:0;
-        transform-origin:center center;
-        position:relative;
+        width:1280px; height:720px; overflow:hidden;
+        flex-shrink:0; transform-origin:center center; position:relative;
       }
     </style>
     <script>
       function scale() {
         var r = document.getElementById('root');
         if (!r) return;
-        var sw = window.innerWidth  || 1920;
-        var sh = window.innerHeight || 1080;
-        var s = Math.min(sw / 1280, sh / 720);
-        r.style.transform = 'scale(' + s + ')';
+        var s = Math.min(window.innerWidth/1280, window.innerHeight/720);
+        r.style.transform = 'scale('+s+')';
       }
       window.addEventListener('load', scale);
       window.addEventListener('resize', scale);
       document.addEventListener('DOMContentLoaded', scale);
-      [100, 400, 900, 2000].forEach(function(t){ setTimeout(scale, t); });
+      [100,400,900,2000].forEach(function(t){setTimeout(scale,t);});
     </script>
-    <script type="module" crossorigin src="/masjidalert-kiosk/assets/index-Ba4n3VKb.js"></script>
-    <link rel="stylesheet" crossorigin href="/masjidalert-kiosk/assets/index-_6uQT1VS.css">
+    <script type="module" crossorigin src="/masjidalert-kiosk/assets/index-b5gNVeMC.js"></script>
+    <link rel="stylesheet" crossorigin href="/masjidalert-kiosk/assets/index-B-0cu5lS.css">
   </head>
   <body><div id="root"></div></body>
 </html>

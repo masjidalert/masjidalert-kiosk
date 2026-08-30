@@ -2,27 +2,58 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=1280, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MasjidAlert Kiosk</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Aref+Ruqaa:wght@400;700&family=Cinzel:wght@400;500;600;700;800;900&family=Cinzel+Decorative:wght@700&family=Noto+Naskh+Arabic:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Reem+Kufi:wght@400;600;700&family=Scheherazade+New:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-      * { box-sizing: border-box; margin: 0; padding: 0; }
-      html { width: 1280px; height: 720px; overflow: hidden; background: #020614; }
-      body { width: 1280px; height: 720px; overflow: hidden; background: #020614; }
-      #root { width: 1280px !important; height: 720px !important; overflow: hidden; }
-      /* Force all direct children of root to fill correctly */
-      #root > * {
-        width: 1280px !important;
-        height: 720px !important;
-        max-width: 1280px !important;
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body {
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        background: #020614;
       }
-      /* Fix h-screen and w-screen classes */
-      .h-screen { height: 720px !important; }
-      .w-screen { width: 1280px !important; }
-      .max-w-\[1600px\] { max-width: 1280px !important; }
+      /* Root is always 1280x720 — JS will scale it */
+      #root {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1280px;
+        height: 720px;
+        overflow: hidden;
+        transform-origin: top left;
+      }
+      /* Override Tailwind screen utilities */
+      #root .w-screen { width: 1280px !important; }
+      #root .h-screen { height: 720px !important; }
+      #root .min-h-screen { min-height: 720px !important; }
     </style>
+    <script>
+      function scaleKiosk() {
+        var root = document.getElementById('root');
+        if (!root) return;
+        var W = 1280, H = 720;
+        var sw = window.innerWidth  || screen.width  || 1920;
+        var sh = window.innerHeight || screen.height || 1080;
+        var scale = Math.min(sw / W, sh / H);
+        var tx = (sw - W * scale) / 2;
+        var ty = (sh - H * scale) / 2;
+        root.style.transform = 'translate(' + tx + 'px,' + ty + 'px) scale(' + scale + ')';
+        // Also set background color on body to fill gaps
+        document.body.style.background = '#020614';
+      }
+      // Run multiple times to catch Silk Browser's late initialization
+      window.addEventListener('load', scaleKiosk);
+      document.addEventListener('DOMContentLoaded', scaleKiosk);
+      window.addEventListener('resize', scaleKiosk);
+      setTimeout(scaleKiosk, 100);
+      setTimeout(scaleKiosk, 500);
+      setTimeout(scaleKiosk, 1000);
+      setTimeout(scaleKiosk, 2000);
+      setTimeout(scaleKiosk, 4000);
+    </script>
     <script type="module" crossorigin src="/masjidalert-kiosk/assets/index-GJM5yul6.js"></script>
     <link rel="stylesheet" crossorigin href="/masjidalert-kiosk/assets/index-8DWP5Qpa.css">
   </head>

@@ -8,37 +8,32 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Aref+Ruqaa:wght@400;700&family=Cinzel:wght@400;500;600;700;800;900&family=Cinzel+Decorative:wght@700&family=Noto+Naskh+Arabic:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Reem+Kufi:wght@400;600;700&family=Scheherazade+New:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-      html, body { width: 100vw; height: 100vh; overflow: hidden; background: #020614; }
+      * { margin:0; padding:0; box-sizing:border-box; }
+      html, body { width:100vw; height:100vh; overflow:hidden; background:#020614; }
       #root {
-        position: absolute;
-        top: 0; left: 0;
-        width: 1280px;
-        height: 720px;
-        overflow: hidden;
-        transform-origin: top left;
+        position:absolute; top:0; left:0;
+        width:1280px; height:720px;
+        overflow:hidden; transform-origin:top left;
       }
     </style>
     <script>
-      function scaleKiosk() {
-        var root = document.getElementById('root');
-        if (!root) return;
-        var sw = window.innerWidth  || 1920;
+      function scale() {
+        var r = document.getElementById('root');
+        if(!r) return;
+        var sw = window.innerWidth || 1920;
         var sh = window.innerHeight || 1080;
-        var scale = Math.min(sw / 1280, sh / 720);
-        var tx = (sw - 1280 * scale) / 2;
-        var ty = (sh - 720 * scale) / 2;
-        root.style.transform = 'translate(' + tx + 'px,' + ty + 'px) scale(' + scale + ')';
+        var s = Math.min(sw/1280, sh/720);
+        var tx = (sw - 1280*s)/2;
+        var ty = (sh - 720*s)/2;
+        r.style.transform = 'translate('+tx+'px,'+ty+'px) scale('+s+')';
       }
-      window.addEventListener('load', scaleKiosk);
-      window.addEventListener('resize', scaleKiosk);
-      document.addEventListener('DOMContentLoaded', scaleKiosk);
-      setTimeout(scaleKiosk, 200);
-      setTimeout(scaleKiosk, 800);
-      setTimeout(scaleKiosk, 2000);
+      window.addEventListener('load', scale);
+      window.addEventListener('resize', scale);
+      document.addEventListener('DOMContentLoaded', scale);
+      [200,600,1200,2500].forEach(function(t){setTimeout(scale,t);});
     </script>
-    <script type="module" crossorigin src="/masjidalert-kiosk/assets/index-C1_P9nkY.js"></script>
-    <link rel="stylesheet" crossorigin href="/masjidalert-kiosk/assets/index-Cu-t--e0.css">
+    <script type="module" crossorigin src="/masjidalert-kiosk/assets/index-D51dRQTd.js"></script>
+    <link rel="stylesheet" crossorigin href="/masjidalert-kiosk/assets/index-Br8RaPkL.css">
   </head>
   <body><div id="root"></div></body>
 </html>

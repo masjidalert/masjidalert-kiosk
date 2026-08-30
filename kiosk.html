@@ -9,30 +9,34 @@
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Aref+Ruqaa:wght@400;700&family=Cinzel:wght@400;500;600;700;800;900&family=Cinzel+Decorative:wght@700&family=Noto+Naskh+Arabic:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Reem+Kufi:wght@400;600;700&family=Scheherazade+New:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
       * { margin:0; padding:0; box-sizing:border-box; }
-      html, body { width:100vw; height:100vh; overflow:hidden; background:#020614; }
+      html, body {
+        width:100vw; height:100vh;
+        overflow:hidden; background:#020614;
+        display:flex; align-items:center; justify-content:center;
+      }
       #root {
-        position:absolute; top:0; left:0;
         width:1280px; height:720px;
-        overflow:hidden; transform-origin:top left;
+        overflow:hidden;
+        transform-origin:center center;
+        flex-shrink:0;
+        position:relative;
       }
     </style>
     <script>
       function scale() {
         var r = document.getElementById('root');
-        if(!r) return;
-        var sw = window.innerWidth || 1920;
+        if (!r) return;
+        var sw = window.innerWidth  || 1920;
         var sh = window.innerHeight || 1080;
-        var s = Math.min(sw/1280, sh/720);
-        var tx = (sw - 1280*s)/2;
-        var ty = (sh - 720*s)/2;
-        r.style.transform = 'translate('+tx+'px,'+ty+'px) scale('+s+')';
+        var s = Math.min(sw / 1280, sh / 720);
+        r.style.transform = 'scale(' + s + ')';
       }
       window.addEventListener('load', scale);
       window.addEventListener('resize', scale);
       document.addEventListener('DOMContentLoaded', scale);
-      [200,600,1200,2500].forEach(function(t){setTimeout(scale,t);});
+      [100, 400, 900, 2000].forEach(function(t){ setTimeout(scale, t); });
     </script>
-    <script type="module" crossorigin src="/masjidalert-kiosk/assets/index-D51dRQTd.js"></script>
+    <script type="module" crossorigin src="/masjidalert-kiosk/assets/index-v44OZBJi.js"></script>
     <link rel="stylesheet" crossorigin href="/masjidalert-kiosk/assets/index-Br8RaPkL.css">
   </head>
   <body><div id="root"></div></body>

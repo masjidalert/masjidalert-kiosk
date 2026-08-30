@@ -9,35 +9,54 @@
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Aref+Ruqaa:wght@400;700&family=Cinzel:wght@400;500;600;700;800;900&family=Cinzel+Decorative:wght@700&family=Noto+Naskh+Arabic:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Reem+Kufi:wght@400;600;700&family=Scheherazade+New:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
       * { margin:0; padding:0; box-sizing:border-box; }
-      html, body {
-        width:100vw; height:100vh; overflow:hidden; background:#020614;
-        display:flex; align-items:center; justify-content:center;
+      html, body { width:100vw; height:100vh; overflow:hidden; background:#020614; }
+      #debug {
+        position:fixed; top:10px; right:10px; z-index:99999;
+        background:rgba(0,0,0,0.85); color:#f0be50;
+        font-family:monospace; font-size:14px;
+        padding:12px; border-radius:8px; border:1px solid #f0be50;
+        line-height:1.8;
       }
       #root {
+        position:absolute; top:0; left:0;
         width:1280px; height:720px; overflow:hidden;
-        flex-shrink:0; transform-origin:center center; position:relative;
+        transform-origin:top left;
       }
     </style>
     <script>
       function scale() {
         var r = document.getElementById('root');
+        var d = document.getElementById('debug');
         if (!r) return;
-        // Use screen.width/height for Fire Stick (physical = 1920x1080)
-        // Fall back to innerWidth/innerHeight for desktop browsers
-        var sw = screen.width  || window.innerWidth  || 1920;
-        var sh = screen.height || window.innerHeight || 1080;
-        var s = Math.min(sw / 1280, sh / 720);
-        r.style.transform = 'scale(' + s + ')';
-        // Fill any gaps with background color
-        document.body.style.background = '#020614';
+        var iw = window.innerWidth;
+        var ih = window.innerHeight;
+        var sw = screen.width;
+        var sh = screen.height;
+        var dpr = window.devicePixelRatio || 1;
+        var s = Math.min(iw / 1280, ih / 720);
+        var tx = (iw - 1280 * s) / 2;
+        var ty = (ih - 720  * s) / 2;
+        r.style.transform = 'translate('+tx+'px,'+ty+'px) scale('+s+')';
+        if (d) {
+          d.innerHTML =
+            'innerW: ' + iw + '<br>' +
+            'innerH: ' + ih + '<br>' +
+            'screenW: ' + sw + '<br>' +
+            'screenH: ' + sh + '<br>' +
+            'DPR: ' + dpr + '<br>' +
+            'scale: ' + s.toFixed(3);
+        }
       }
       window.addEventListener('load', scale);
       window.addEventListener('resize', scale);
       document.addEventListener('DOMContentLoaded', scale);
-      [100, 400, 900, 2000, 4000].forEach(function(t){ setTimeout(scale, t); });
+      [200, 800, 2000].forEach(function(t){ setTimeout(scale, t); });
     </script>
     <script type="module" crossorigin src="/masjidalert-kiosk/assets/index-CvRjy_j7.js"></script>
     <link rel="stylesheet" crossorigin href="/masjidalert-kiosk/assets/index-DgLuQFTC.css">
   </head>
-  <body><div id="root"></div></body>
+  <body>
+    <div id="debug">Loading...</div>
+    <div id="root"></div>
+  </body>
 </html>

@@ -22,8 +22,6 @@
       function scale() {
         var r = document.getElementById('root');
         if (!r) return;
-        // Fire Stick HD: innerW=960, innerH=540, DPR=2 (physical 1920x1080)
-        // Scale = min(960/1280, 540/720) = 0.75 — fills screen perfectly
         var sw = window.innerWidth  || 960;
         var sh = window.innerHeight || 540;
         var s = Math.min(sw / 1280, sh / 720);
@@ -34,7 +32,7 @@
       document.addEventListener('DOMContentLoaded', scale);
       [100, 500, 1500].forEach(function(t){ setTimeout(scale, t); });
     </script>
-    <script type="module" crossorigin src="/masjidalert-kiosk/assets/index-CvRjy_j7.js"></script>
+    <script type="module" crossorigin src="/masjidalert-kiosk/assets/index-BrzEL0LI.js"></script>
     <link rel="stylesheet" crossorigin href="/masjidalert-kiosk/assets/index-DgLuQFTC.css">
   </head>
   <body><div id="root"></div></body>

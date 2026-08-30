@@ -2,29 +2,59 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=1280, height=720, initial-scale=1.0" />
     <title>MasjidAlert Kiosk</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Aref+Ruqaa:wght@400;700&family=Cinzel:wght@400;500;600;700;800;900&family=Cinzel+Decorative:wght@700&family=Noto+Naskh+Arabic:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Reem+Kufi:wght@400;600;700&family=Scheherazade+New:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
-      html, body { width: 100vw; height: 100vh; background: #020614; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-      #scaler { width: 1280px; height: 720px; transform-origin: center center; flex-shrink: 0; }
-      iframe { width: 1280px; height: 720px; border: none; display: block; }
+      html {
+        width: 1280px;
+        height: 720px;
+        overflow: hidden;
+        background: #020614;
+        transform-origin: 0 0;
+      }
+      body {
+        width: 1280px;
+        height: 720px;
+        overflow: hidden;
+        background: #020614;
+      }
+      #root {
+        width: 1280px;
+        height: 720px;
+        overflow: hidden;
+      }
     </style>
     <script>
-      function scale() {
-        var el = document.getElementById('scaler');
-        if (!el) return;
-        var s = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
-        el.style.transform = 'scale(' + s + ')';
-      }
-      window.addEventListener('resize', scale);
-      window.addEventListener('load', function() { scale(); setTimeout(scale, 500); setTimeout(scale, 1500); });
-      document.addEventListener('DOMContentLoaded', scale);
+      // Scale to fit any screen — runs before content loads
+      (function() {
+        function applyScale() {
+          var vw = window.screen.availWidth  || window.screen.width  || window.innerWidth  || 1920;
+          var vh = window.screen.availHeight || window.screen.height || window.innerHeight || 1080;
+          var sx = vw / 1280;
+          var sy = vh / 720;
+          var s  = Math.min(sx, sy);
+          var ox = Math.round((vw - 1280 * s) / 2);
+          var oy = Math.round((vh - 720  * s) / 2);
+          document.documentElement.style.transform =
+            'translate(' + ox + 'px, ' + oy + 'px) scale(' + s + ')';
+        }
+        document.addEventListener('DOMContentLoaded', applyScale);
+        window.addEventListener('load', applyScale);
+        window.addEventListener('resize', applyScale);
+        setTimeout(applyScale, 100);
+        setTimeout(applyScale, 500);
+        setTimeout(applyScale, 1500);
+        setTimeout(applyScale, 3000);
+      })();
     </script>
+    <script type="module" crossorigin src="/masjidalert-kiosk/assets/index-GJM5yul6.js"></script>
+    <link rel="stylesheet" crossorigin href="/masjidalert-kiosk/assets/index-8DWP5Qpa.css">
   </head>
   <body>
-    <div id="scaler">
-      <iframe src="/masjidalert-kiosk/kiosk.html" scrolling="no"></iframe>
-    </div>
+    <div id="root"></div>
   </body>
 </html>
